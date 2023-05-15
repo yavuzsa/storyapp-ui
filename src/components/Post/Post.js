@@ -10,12 +10,12 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Container } from "@mui/material";
 import Comment from "../Comment/Comment";
+import CommentForm from "../Comment/CommentForm";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -121,7 +121,7 @@ function Post(props) {
                             <Comment userId = {1} userName = {"USER"} text = {comment.text}>
                             </Comment>
                         )):"Loading Comments..."}
-
+                        <CommentForm userId = {1} userName = {"USER"} postId = {postId}></CommentForm>
                     </div>
                 </Collapse>
             </Card>
