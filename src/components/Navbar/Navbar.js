@@ -11,8 +11,8 @@ function Navbar() {
     let userId = 1;
     return (
         <div>
-            <Box sx={{ flexGrow: 1}}>
-                <AppBar position="static" >
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -28,7 +28,7 @@ function Navbar() {
                             component="div"
                             sx={{
                                 flexGrow: 1,
-                                textAlign: "left"
+                                textAlign: "left",
                             }}
                         >
                             <Link
@@ -42,20 +42,30 @@ function Navbar() {
                                 Home
                             </Link>
                         </Typography>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                        >
-                        <Link
-                            style={{
-                                textDecoration: "none",
-                                boxShadow: "none",
-                                color: "white",
-                            }}
-                            to={{ pathname: "/users/" + userId }}
-                        >
-                            User
-                        </Link>
+                        <Typography variant="h6" component="div">
+                            <Link
+                                style={{
+                                    textDecoration: "none",
+                                    boxShadow: "none",
+                                    color: "white",
+                                    margin: "20px",
+                                }}
+                                to={{ pathname: "/users/" + userId }}
+                            >
+                                User
+                            </Link>
+                        </Typography>
+                        <Typography variant="h6" component="div">
+                            <Link
+                                style={{
+                                    textDecoration: "none",
+                                    boxShadow: "none",
+                                    color: "white",
+                                }}
+                                to="/createstory"
+                            >
+                                Create Story
+                            </Link>
                         </Typography>
                     </Toolbar>
                 </AppBar>
