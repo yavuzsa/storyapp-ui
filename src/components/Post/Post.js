@@ -14,6 +14,8 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Container } from "@mui/material";
+import Comment from "../Comment/Comment";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -113,7 +115,14 @@ function Post(props) {
                     </ExpandMore>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent></CardContent>
+                    <div sx={{ width: "800px", textAlign: "left", margin: "20px"}}>
+                        {error? "error" : 
+                        isLoaded? commentList.map(comment => (
+                            <Comment userId = {1} userName = {"USER"} text = {comment.text}>
+                            </Comment>
+                        )):"Loading Comments..."}
+
+                    </div>
                 </Collapse>
             </Card>
         </div>
