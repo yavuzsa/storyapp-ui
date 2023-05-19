@@ -29,14 +29,15 @@ const ExpandMore = styled((props) => {
 }));
 
 function Post(props) {
-    const { title, text, userName, userId, postId } = props;
+    const { title, text, userName, userId, postId, likes } = props;
     const [expanded, setExpanded] = useState(false);
-    const [liked, setLiked] = useState(false);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [commentList, setCommentList] = useState([]);
     const isInitialMount = useRef(true);
-
+    const [likeCount, setLikeCount] = useState(likes.length);
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeId,setLikeId] = useState(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -45,7 +46,14 @@ function Post(props) {
     };
     
     const handleLike = () => { 
-        setLiked(!liked);
+        setIsLiked(!isLiked);
+        if(!isLiked) {
+            saveLike();
+            setLikeCount(likeCount + 1)
+        } else {
+            deleteLike();
+            setLikeCount(likeCount - 1)
+        }
     }
 
     const refreshComments = () => {
@@ -63,6 +71,36 @@ function Post(props) {
         );
     }
 
+    const saveLike = () => {
+        fetch("/likes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                postId: postId,
+                userId: userId,
+            }),
+        })
+            .then((res) => res.text())
+            .catch((err) => console.log(err));
+    };
+
+    const checkLikes = () => {
+        var likeControl = likes.find((like => like.userId === userId));
+        if(likeControl != null) {
+            setLikeId(likeControl.id);
+            setIsLiked(true);
+        }
+    }
+
+    const deleteLike = () => {
+        fetch("/likes/" + likeId, {
+            method: "DELETE",
+        })
+        .catch((err) => console.log(err));
+    }
+
     useEffect(() => {
         if(isInitialMount.current) {
             isInitialMount.current = false;
@@ -70,6 +108,9 @@ function Post(props) {
             refreshComments()
         }
     }, []);
+
+
+    useEffect(() => {checkLikes()},[])
 
     return (
         <div className="postContainer">
@@ -103,8 +144,9 @@ function Post(props) {
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton onClick={handleLike} aria-label="add to favorites">
-                        <FavoriteIcon style={liked ? {color: "red"} : null} />
+                        <FavoriteIcon style={isLiked ? {color: "red"} : null} />
                     </IconButton>
+                    {likeCount}
                     <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
