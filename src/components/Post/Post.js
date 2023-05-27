@@ -76,10 +76,11 @@ function Post(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization" : localStorage.getItem("tokenKey"),
             },
             body: JSON.stringify({
                 postId: postId,
-                userId: userId,
+                userId: localStorage.getItem("currentUser")
             }),
         })
             .then((res) => res.text())
@@ -87,7 +88,7 @@ function Post(props) {
     };
 
     const checkLikes = () => {
-        var likeControl = likes.find((like => like.userId === userId));
+        var likeControl = likes.find((like => ""+like.userId === localStorage.getItem("currentUser")));
         if(likeControl != null) {
             setLikeId(likeControl.id);
             setIsLiked(true);
@@ -97,6 +98,9 @@ function Post(props) {
     const deleteLike = () => {
         fetch("/likes/" + likeId, {
             method: "DELETE",
+            headers: {
+                "Authorization" : localStorage.getItem("tokenKey"),
+            },
         })
         .catch((err) => console.log(err));
     }
