@@ -10,21 +10,21 @@ function Home() {
 
     const refreshPosts = () => {
         fetch("/posts")
-        .then((res) => res.json())
-        .then(
-            (result) => {
-                setIsLoaded(true);
-                setPostList(result);
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        );
-    }
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setPostList(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            );
+    };
 
     useEffect(() => {
-        refreshPosts()
+        refreshPosts();
     }, []);
 
     if (error) {
@@ -39,12 +39,27 @@ function Home() {
                     flexWrap: "wrap",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: '#f0f5ff',
+                    backgroundColor: "#f0f5ff",
                 }}
             >
-                <PostForm userId={1} userName={"salih"} refreshPosts = {refreshPosts} />
+                {localStorage.getItem("currentUser") == null ? (
+                    ""
+                ) : (
+                    <PostForm
+                        userId={localStorage.getItem("currentUser")}
+                        userName={localStorage.getItem("userName")}
+                        refreshPosts={refreshPosts}
+                    />
+                )}
                 {postList.map((post) => (
-                    <Post likes={post.likes} postId={post.id} userId={post.userId} userName={post.userName} title={post.title} text={post.text}></Post>
+                    <Post
+                        likes={post.likes}
+                        postId={post.id}
+                        userId={post.userId}
+                        userName={post.userName}
+                        title={post.title}
+                        text={post.text}
+                    ></Post>
                 ))}
             </div>
         );

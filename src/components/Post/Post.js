@@ -143,9 +143,10 @@ function Post(props) {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
+                    {localStorage.getItem("currentUser") == null ? "Likes: " :
                     <IconButton onClick={handleLike} aria-label="add to favorites">
                         <FavoriteIcon style={isLiked ? {color: "red"} : null} />
-                    </IconButton>
+                    </IconButton>}
                     {likeCount}
                     <ExpandMore
                         expand={expanded}
@@ -163,7 +164,8 @@ function Post(props) {
                             <Comment userId = {1} userName = {"USER"} text = {comment.text}>
                             </Comment>
                         )):"Loading Comments..."}
-                        <CommentForm userId = {1} userName = {"USER"} postId = {postId}></CommentForm>
+                        {localStorage.getItem("currentUser") == null ? "" : 
+                        <CommentForm userId = {1} userName = {"USER"} postId = {postId}></CommentForm>}
                     </div>
                 </Collapse>
             </Card>

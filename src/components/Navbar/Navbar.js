@@ -1,14 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { LockOpen } from "@mui/icons-material";
 
 function Navbar() {
-    let userId = 1;
+
+    let navigate = useNavigate();
+
+    const handleLock = () => {
+        localStorage.removeItem("tokenKey")
+        localStorage.removeItem("currentUser")
+        localStorage.removeItem('userName')
+    }
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
@@ -43,20 +52,49 @@ function Navbar() {
                             </Link>
                         </Typography>
                         <Typography variant="h6" component="div">
-                            <Link
-                                style={{
-                                    textDecoration: "none",
-                                    boxShadow: "none",
-                                    color: "white",
-                                    margin: "20px",
-                                }}
-                                to={{ pathname: "/users/" + userId }}
-                            >
-                                User
-                            </Link>
+                            {localStorage.getItem("currentUser") == null ? (
+                                <Link
+                                    style={{
+                                        textDecoration: "none",
+                                        boxShadow: "none",
+                                        color: "white",
+                                        margin: "20px",
+                                    }}
+                                    to="/auth"
+                                >
+                                    Login or Register
+                                </Link>
+                            ) : (
+                                <div>
+                                <Link
+                                    style={{
+                                        textDecoration: "none",
+                                        boxShadow: "none",
+                                        color: "white",
+                                        margin: "20px",
+                                    }}
+                                    to="/auth"
+                                    onClick={() => handleLock()}
+                                >
+                                    Log Out
+                                </Link>
+                                <Link
+                                    style={{
+                                        textDecoration: "none",
+                                        boxShadow: "none",
+                                        color: "white",
+                                        margin: "20px",
+                                    }}
+                                    to={{ pathname: "/users/" + localStorage.getItem("currentUser") }}
+                                >
+                                    Profile
+                                </Link>
+                                </div>
+                            )}
                         </Typography>
                         <Typography variant="h6" component="div">
-                            <Link
+                            {localStorage.getItem("currentUser") != null ? 
+                            (<Link
                                 style={{
                                     textDecoration: "none",
                                     boxShadow: "none",
@@ -65,7 +103,8 @@ function Navbar() {
                                 to="/createstory"
                             >
                                 Create Story
-                            </Link>
+                            </Link> )
+                            : (<div></div>) }
                         </Typography>
                     </Toolbar>
                 </AppBar>
