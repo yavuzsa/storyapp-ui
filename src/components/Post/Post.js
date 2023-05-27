@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function Post(props) {
-    const { title, text, userName, userId, postId, likes } = props;
+    const { title, text, userName, userId, postId, likes, storyDate, createDate, location } = props;
     const [expanded, setExpanded] = useState(false);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -38,6 +38,7 @@ function Post(props) {
     const [likeCount, setLikeCount] = useState(likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [likeId,setLikeId] = useState(null);
+    const [dateInfo, setDateInfo] = useState("");
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -105,6 +106,17 @@ function Post(props) {
         .catch((err) => console.log(err));
     }
 
+    const formatDate = (date) => {
+        if (date == null) {
+            return "";
+        }
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });    
+    }
+
     useEffect(() => {
         if(isInitialMount.current) {
             isInitialMount.current = false;
@@ -138,7 +150,7 @@ function Post(props) {
                         </Link>
                     }
                     title={title}
-                    subheader="May 9, 2023"
+                    subheader={createDate}
                 />
 
                 <CardContent>
@@ -172,6 +184,16 @@ function Post(props) {
                         <CommentForm userId = {1} userName = {"USER"} postId = {postId}></CommentForm>}
                     </div>
                 </Collapse>
+                <CardContent>
+                    <div>
+                        {storyDate}
+                    </div>
+                </CardContent>
+                <CardContent>
+                    <div>
+                        {location}
+                    </div>
+                </CardContent>
             </Card>
         </div>
     );

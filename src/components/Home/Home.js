@@ -59,6 +59,9 @@ function Home() {
                         userName={post.userName}
                         title={post.title}
                         text={post.text}
+                        storyDate={post.storyDate}
+                        createDate={post.createDate}
+                        location={post.location}
                     ></Post>
                 ))}
             </div>
