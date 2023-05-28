@@ -61,7 +61,8 @@ function Home() {
                         text={post.text}
                         storyDate={post.storyDate}
                         createDate={post.createDate}
-                        location={post.location}
+                        lat={post.location == null ? null : post.location.lat}
+                        lng={post.location == null ? null : post.location.lng}
                     ></Post>
                 ))}
             </div>

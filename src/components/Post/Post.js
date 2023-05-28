@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function Post(props) {
-    const { title, text, userName, userId, postId, likes, storyDate, createDate, location } = props;
+    const { title, text, userName, userId, postId, likes, storyDate, createDate, lat, lng } = props;
     const [expanded, setExpanded] = useState(false);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -191,7 +191,7 @@ function Post(props) {
                 </CardContent>
                 <CardContent>
                     <div>
-                        {location}
+                        {lat} "  " {lng}
                     </div>
                 </CardContent>
             </Card>

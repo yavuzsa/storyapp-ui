@@ -88,6 +88,10 @@ function PostForm(props) {
         setSelectedDate(date);
     };
 
+    const handleLocation = (loc) => {
+        setLocation(loc);
+    };
+
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
@@ -122,15 +126,11 @@ function PostForm(props) {
                 types: ["geocode"],
             };
 
-            // Initialize the Autocomplete input
             const locationInput = document.getElementById("locationInput");
             const autocomplete = new window.google.maps.places.Autocomplete(
                 locationInput,
                 autocompleteOptions
             );
-
-            // Set the Autocomplete to bias the results to the current viewport
-            autocomplete.bindTo("bounds", map);
 
             // Set the Autocomplete's place_changed event listener
             autocomplete.addListener("place_changed", () => {
@@ -141,6 +141,7 @@ function PostForm(props) {
                         "Selected Location:",
                         place.geometry.location.toJSON()
                     );
+                    handleLocation(place.geometry.location);
                 }
             });
         };
@@ -248,16 +249,10 @@ function PostForm(props) {
                         <input
                             id="locationInput"
                             type="text"
+                            onChange={handleLocation}
                             placeholder="Select Location"
                             style={{ width: "100%", marginBottom: "10px" }}
                         />
-                        <div
-                            ref={mapRef}
-                            style={{ width: "100%", height: "300px" }}
-                        ></div>
-                        <Button onClick={handleLocationSelect}>
-                            Select Location
-                        </Button>
                     </div>
                 </CardContent>
             </Card>
