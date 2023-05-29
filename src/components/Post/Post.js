@@ -150,7 +150,7 @@ function Post(props) {
                         </Link>
                     }
                     title={title}
-                    subheader={createDate}
+                    subheader= {"Created at: "+createDate}
                 />
 
                 <CardContent>
@@ -181,18 +181,14 @@ function Post(props) {
                             </Comment>
                         )):"Loading Comments..."}
                         {localStorage.getItem("currentUser") == null ? "" : 
-                        <CommentForm userId = {1} userName = {"USER"} postId = {postId}></CommentForm>}
+                        <CommentForm userId = {localStorage.getItem("currentUser")} userName = {localStorage.getItem("userName")} postId = {postId}></CommentForm>}
                     </div>
                 </Collapse>
                 <CardContent>
-                    <div>
-                        {storyDate}
-                    </div>
+                    {storyDate == null ? <div></div> : <div> Specified date: {storyDate} </div>}    
                 </CardContent>
                 <CardContent>
-                    <div>
-                        {lat} "  " {lng}
-                    </div>
+                    {lat == null ? <div></div> : <div> Latitude: {lat}, Longitude: {lng} </div>}
                 </CardContent>
             </Card>
         </div>

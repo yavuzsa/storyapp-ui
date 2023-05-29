@@ -14,7 +14,7 @@ function Home() {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setPostList(result);
+                    setPostList(result.reverse());
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -28,9 +28,9 @@ function Home() {
     }, []);
 
     if (error) {
-        return <div> ERRRROOORRR! </div>;
+        return <div> Error while loading the posts. Check connection. </div>;
     } else if (!isLoaded) {
-        return <div> Loading.:.:.:.: </div>;
+        return <div> Loading....! This may take just a moment please be patient.</div>;
     } else {
         return (
             <div
