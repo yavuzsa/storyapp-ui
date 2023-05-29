@@ -195,7 +195,7 @@ function PostForm(props) {
                             id="outline-adornment-amount"
                             multiline
                             placeholder="title"
-                            inputProps={{ maxLength: 50 }}
+                            inputProps={{ maxLength: 150 }}
                             fullWidth
                             value={title}
                             onChange={(i) => handleTitle(i.target.value)}
