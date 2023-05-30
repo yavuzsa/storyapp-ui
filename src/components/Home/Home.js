@@ -9,7 +9,7 @@ function Home() {
     const [postList, setPostList] = useState([]);
 
     const refreshPosts = () => {
-        fetch("/posts")
+        fetch("/api/posts")
             .then((res) => res.json())
             .then(
                 (result) => {

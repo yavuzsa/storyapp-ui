@@ -22,7 +22,7 @@ function Auth() {
 
     const sendRequest = (path) => {
 
-        fetch("/auth/"+path, {
+        fetch("/api/auth/"+path, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

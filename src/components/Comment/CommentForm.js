@@ -26,7 +26,7 @@ function CommentForm(props) {
     };
 
     const saveComment = () => {
-        fetch("/comments", {
+        fetch("/api/comments", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
