@@ -1,5 +1,5 @@
 {
     "rewrites": [
-      { "source": "/api/:path*", "destination": "https://app-dd90c65e-7942-424f-b5b9-0ac19252d021.cleverapps.io/:path*" }
+      { "source": "/api/:path*", "destination": "http://app-dd90c65e-7942-424f-b5b9-0ac19252d021.cleverapps.io/:path*" }
     ]
   }
