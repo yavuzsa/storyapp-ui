@@ -73,7 +73,7 @@ function Post(props) {
     }
 
     const saveLike = () => {
-        fetch("/likes", {
+        fetch("/api/likes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function Post(props) {
     }
 
     const deleteLike = () => {
-        fetch("/likes/" + likeId, {
+        fetch("/api/likes/" + likeId, {
             method: "DELETE",
             headers: {
                 "Authorization" : localStorage.getItem("tokenKey"),
