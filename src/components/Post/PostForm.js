@@ -48,7 +48,7 @@ function PostForm(props) {
     const mapRef = useRef(null);
 
     const savePost = () => {
-        fetch("/api/posts", {
+        fetch("/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -58,7 +58,7 @@ function Post(props) {
     }
 
     const refreshComments = () => {
-        fetch("/api/comments?postId="+postId)
+        fetch("/comments?postId="+postId)
         .then((res) => res.json())
         .then(
             (result) => {
@@ -73,7 +73,7 @@ function Post(props) {
     }
 
     const saveLike = () => {
-        fetch("/api/likes", {
+        fetch("/likes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function Post(props) {
     }
 
     const deleteLike = () => {
-        fetch("/api/likes/" + likeId, {
+        fetch("/likes/" + likeId, {
             method: "DELETE",
             headers: {
                 "Authorization" : localStorage.getItem("tokenKey"),
